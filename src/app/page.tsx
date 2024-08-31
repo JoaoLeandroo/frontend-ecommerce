@@ -1,8 +1,12 @@
+import Container from "@/components/Container"
+import BannerHome from "@/components/others/BannerHome";
 
 export default function Home() {
   return (
-    <div>
-      <h2 className="text-3xl font-bold">E-commerce</h2>
-    </div>
+    <Container>
+      <section>
+        <BannerHome/>
+      </section>
+    </Container>
   );
 }
