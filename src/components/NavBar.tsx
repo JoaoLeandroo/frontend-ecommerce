@@ -25,13 +25,13 @@ const NavBar = () => {
           </nav>
           <div className="hidden lg:flex items-center gap-x-3 font-semibold">
             <Link
-              href={"/"}
+              href={"/session"}
               className="px-4 h-11 border-2 border-white hover:bg-indigo-700 text-center flex items-center rounded-lg shadow"
             >
               Login
             </Link>
             <Link
-              href={"/"}
+              href={"/register"}
               className="px-4 h-11 border-2 border-white hover:bg-indigo-700 text-center flex items-center rounded-lg shadow"
             >
               Cadastre-se
