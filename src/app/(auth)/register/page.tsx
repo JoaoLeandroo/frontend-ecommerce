@@ -15,6 +15,8 @@ const RegisterPage = () => {
   const [password, setPassword] = useState<string | null>("")
   const [password1, setPassword1] = useState<string | null>("")
   const [errors, setErrors] = useState<any>({})
+  const [loading, setLoading] = useState<boolean>(false)
+  const [sucess, setSucess] = useState<boolean>(false)
 
   const registerUser = async (event: FormEvent) => {
     event.preventDefault()
@@ -38,6 +40,7 @@ const RegisterPage = () => {
     return
     }
 
+    setLoading(true)
     const check = await api.post("/check-email", {
       email: email,
     })
@@ -47,6 +50,7 @@ const RegisterPage = () => {
         ...prevState,
         email: ["Usuario já cadastrado."]
     }))
+    setLoading(false)
       return
     }
 
@@ -56,13 +60,38 @@ const RegisterPage = () => {
       password: password,
     })
 
+    setSucess(true)
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+    setSucess(false)
+    setLoading(false)
     router.push("/session")
     return response
   }
 
   return (
     <Container>
+      {
+        sucess ? 
+        <div role="alert" className="alert alert-success absolute -top-20 left-0 animate-bounce">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 shrink-0 stroke-current"
+          fill="none"
+          viewBox="0 0 24 24">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Usuario registrado com sucesso!</span>
+      </div>
+         : ""
+      }
       <div className="flex items-center justify-center mt-24">
+
+
+        
         <form className="max-w-[500px] w-full border border-white rounded-lg p-3" onSubmit={registerUser}>
           <div className="w-full text-center mb-4 relative">
             <h1 className="font-bold text-xl leading-3">Tec</h1>
@@ -145,7 +174,8 @@ const RegisterPage = () => {
                 {errors.password1 && <p className="text-red-500 text-sm">{errors.password1[0]}</p>}
             </div>
 
-            <button className="btn btn-warning h-11 text-xl font-bold uppercase mt-4" type="submit">Registrar
+            <button className="btn btn-warning h-11 text-xl  flex items-center justify-center font-bold uppercase mt-4" type="submit">
+              {loading ? <span className="loading loading-spinner loading-md"></span> : "Registrar"}
               <span className="sr-only">Registrar o usuario</span>
             </button>
           </section>
