@@ -9,7 +9,7 @@ const SessionPage = () => {
         <Container>
         <div className="flex items-center justify-center mt-24">
           <form className="max-w-[500px] w-full border border-white rounded-lg p-3">
-            <div className="w-full text-center mb-4 relative">
+            <div className="w-full text-center mb-4 relative select-none">
               <h1 className="font-bold text-xl leading-3">Tec</h1>
               <span className="text-yellow-500/80 leading-3 font-bold text-2xl">
                 Imports
