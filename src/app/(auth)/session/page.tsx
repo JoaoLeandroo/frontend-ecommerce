@@ -13,6 +13,7 @@ const SessionPage = () => {
   const [errors, setErrors] = useState<any>({});
   const [email, setEmail] = useState<string | null>("");
   const [password, setPassword] = useState<string | null>("");
+  const [loading, setLoading] = useState<boolean>(false)
 
   const sessionUser = async (event: FormEvent) => {
     event.preventDefault();
@@ -27,6 +28,7 @@ const SessionPage = () => {
       return;
     }
 
+    setLoading(false)
     const user = await api.post("/session", {
       email: email,
       password: password,
@@ -38,11 +40,13 @@ const SessionPage = () => {
         email: ["Login ou senha inválido"],
         password: ["Login ou senha inválido."],
       }));
+      setLoading(false)
       return;
     }
 
+    setLoading(true)
     setCookie(null, "@e-commerce.token", user.data?.token)
-    router.push("/dashboard")
+    router.push("/")
   };
 
   return (
@@ -122,7 +126,7 @@ const SessionPage = () => {
               className="btn btn-warning h-11 text-xl font-bold uppercase mt-4"
               type="submit"
             >
-              Entrar
+              {loading ? <span className="loading loading-spinner loading-md"></span> : "Login"}
               <span className="sr-only">Fazer login</span>
             </button>
           </section>
