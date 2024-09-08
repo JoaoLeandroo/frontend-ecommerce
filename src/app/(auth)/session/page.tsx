@@ -3,12 +3,14 @@
 import Container from "@/components/Container";
 import { api } from "@/services/api";
 import { SessionSchema } from "@/services/zod";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useContext } from "react";
+import { AuthContext } from '@/contexts/auth';
 import { setCookie } from "nookies";
 import { useRouter } from "next/navigation";
 
 const SessionPage = () => {
   const router = useRouter();
+  const { setIdUser } = useContext(AuthContext)
 
   const [errors, setErrors] = useState<any>({});
   const [email, setEmail] = useState<string | null>("");
@@ -43,9 +45,9 @@ const SessionPage = () => {
       setLoading(false)
       return;
     }
-
     setLoading(true)
     setCookie(null, "@e-commerce.token", user.data?.token)
+    setIdUser(user.data?.id)
     router.push("/")
   };
 

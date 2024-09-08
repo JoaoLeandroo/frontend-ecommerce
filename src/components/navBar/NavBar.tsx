@@ -1,6 +1,7 @@
-import Container from "./Container";
+import Container from "../Container";
 import Link from "next/link";
 import { Search, Grip } from "lucide-react";
+import AdminNavBar from "./AdminNavBar";
 
 const NavBar = () => {
   return (
@@ -37,6 +38,7 @@ const NavBar = () => {
               Cadastre-se
             </Link>
           </div>
+          <AdminNavBar/>
 
           <div className="drawer drawer-end flex lg:hidden w-8 items-center justify-center">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />

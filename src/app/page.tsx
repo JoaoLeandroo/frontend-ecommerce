@@ -24,11 +24,11 @@ fetchData()
         <BannerHome/>
       </section>
       <section className="mt-5">
-        {products.map((items: any) => (
+        {/* {products.map((items: any) => (
           <div key={items.id}>
             <p>{items.nomeProduto} - {items.quantidade}</p>
           </div>
-        ))}
+        ))} */}
       </section>
     </Container>
   );

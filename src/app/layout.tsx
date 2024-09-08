@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/navBar/NavBar";
+import AuthProvider from "@/contexts/auth";
 
 const font = Montserrat({ subsets: ["latin"], weight: ["300", "400", "600", "800", "900"] });
 
@@ -19,10 +20,12 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={font.className}>
-        <div className="min-h-screen flex flex-col">
-          <NavBar/>
-          <main className="flex-grow">{children}</main>
-        </div>
+        <AuthProvider>
+          <div className="min-h-screen flex flex-col">
+            <NavBar/>
+            <main className="flex-grow">{children}</main>
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );
